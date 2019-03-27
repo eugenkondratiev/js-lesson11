@@ -16,6 +16,18 @@ class StudentsController {
             this.model.addStudent(this.view.input.value);
             this.updateStudents();
         });
+    
+        this.view.removeButton.addEventListener('click', () => {
+            try {
+                this.model.removeStudent(this.view.input.value);
+                this.updateStudents();    
+            } catch (e) {
+                alert("No such student in the list!");
+                console.log(e.message);
+                
+            }
+        });
+
     }
  
     showStudents() {
