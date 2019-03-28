@@ -9,13 +9,21 @@ class Students {
        return this._defaultData || [];
    }
 
+   checkStudent(student) {
+    return this._DB.includes(student);
+   }
+
    addStudent(student) {
-       this._DB.push(student);
-       console.log(this._DB)
+       if (!this.checkStudent(student)) {
+        this._DB.push(student);
+        console.log(this._DB)
+       } else {
+           throw new Error('Duplicate name. No repeat allowed');
+       }
    }
 
    removeStudent(student) {
-       if (this._DB.includes(student)) {
+       if (this.checkStudent(student)) {
            this._DB.splice(this._DB.indexOf(student), 1);
            return 'student has been removed'
        } else {

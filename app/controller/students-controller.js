@@ -13,8 +13,16 @@ class StudentsController {
  
     _addFormListeners() {
         this.view.addButton.addEventListener('click', () => {
-            this.model.addStudent(this.view.input.value);
-            this.updateStudents();
+            try {
+                this.model.addStudent(this.view.input.value);
+                this.updateStudents();                    
+            } catch (error) {
+                console.log(error.message);
+                if (error.message == 'Duplicate name. No repeat allowed') {
+                    alert("Such student already exist in a list!");
+                }
+                
+            }
         });
     
         this.view.removeButton.addEventListener('click', () => {
