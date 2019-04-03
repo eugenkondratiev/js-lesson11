@@ -40,6 +40,15 @@ class StudentsView {
        this.addButton = document.createElement('button');
        this.removeButton = document.createElement('button');
 
+       this.bottomContainer = document.createElement('div');
+        this.substituteButton = document.createElement('button');
+        this.newStudent = document.createElement('input');
+
+       container.style.border = '1px solid black';
+       container.style.borderRadius = '5px';
+       container.style.display = 'inline-block';
+
+
        container.style.border = '1px solid black';
        container.style.borderRadius = '5px';
        container.style.display = 'inline-block';
@@ -53,6 +62,14 @@ class StudentsView {
        this.addButton.style.margin = '5px';
 
 
+       this.newStudent.style.width = '150px';
+       this.newStudent.style.height = '40px';
+       this.newStudent.style.margin = '5px';
+
+       this.substituteButton.textContent = 'SUBSTITUTE ON STUDENT';
+       this.substituteButton.style.height = '50px';
+       this.substituteButton.style.margin = '5px';
+
        this.removeButton.textContent = 'REMOVE STUDENT';
        this.removeButton.style.height = '40px';
        this.removeButton.style.margin = '5px';
@@ -60,6 +77,10 @@ class StudentsView {
        container.appendChild(this.input);
        container.appendChild(this.addButton);
        container.appendChild(this.removeButton);
+
+       this.bottomContainer.appendChild(this.substituteButton);
+       this.bottomContainer.appendChild(this.newStudent);
+        container.appendChild(this.bottomContainer);
        (document.querySelector(context) || this.container).appendChild(container);
    }
 }

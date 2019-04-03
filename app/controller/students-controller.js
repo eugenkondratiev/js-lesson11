@@ -19,6 +19,7 @@ class StudentsController {
             } catch (error) {
                 console.log(error.message);
                 if (error.message == 'Duplicate name. No repeat allowed') {
+ //                   alert("Такой студент уже есть в списке!");
                     alert("Such student already exist in a list!");
                 }
                 
@@ -30,7 +31,18 @@ class StudentsController {
                 this.model.removeStudent(this.view.input.value);
                 this.updateStudents();    
             } catch (e) {
+ //               alert("В списке нет такого студента!");
                 alert("No such student in the list!");
+                console.log(e.message);
+                
+            }
+        });
+
+        this.view.substituteButton.addEventListener('click', () => {
+            try {
+                this.model.substituteStudent(this.view.newStudent.value, this.view.input.value);
+                this.updateStudents();                    
+            } catch (e) {
                 console.log(e.message);
                 
             }
