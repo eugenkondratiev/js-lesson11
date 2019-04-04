@@ -19,18 +19,18 @@ class Students {
         console.log(this._DB)
        } else {
         throw new Error('Duplicate name. No repeat allowed');
-        // throw new Error('РўР°РєРѕР№ СЃС‚СѓРґРµРЅС‚ СѓР¶Рµ РµСЃС‚СЊ.');
+        // throw new Error('Такой студент уже есть.');
        }
    }
 
    removeStudent(student) {
        if (this.checkStudent(student)) {
            this._DB.splice(this._DB.indexOf(student), 1);
-        //    return 'РўР°РєРѕР№ СЃС‚СѓРґРµРЅС‚ РЅРµ Р±С‹Р» СѓРґР°Р»РµРЅ РёР· СЃРїРёСЃРєР°'
-          return 'student has been removed'
+           return 'Такой студент не был удален из списка'
+        //   return 'student has been removed'
        } else {
        throw new Error('Check student name');
-        // throw new Error('РџСЂРѕРІРµСЂСЊС‚Рµ РІРІРµРґРµРЅРЅРѕРµ РёРјСЏ СЃС‚СѓРґРЅРµС‚Р°');
+        // throw new Error('Проверьте введенное имя студнета');
        }
    }
 

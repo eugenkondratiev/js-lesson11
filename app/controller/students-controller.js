@@ -19,8 +19,8 @@ class StudentsController {
             } catch (error) {
                 console.log(error.message);
                 if (error.message == 'Duplicate name. No repeat allowed') {
- //                   alert("РўР°РєРѕР№ СЃС‚СѓРґРµРЅС‚ СѓР¶Рµ РµСЃС‚СЊ РІ СЃРїРёСЃРєРµ!");
-                    alert("Such student already exist in a list!");
+                   alert("Такой студент уже есть в списке!");
+                    // alert("Such student already exist in a list!");
                 }
                 
             }
@@ -31,8 +31,8 @@ class StudentsController {
                 this.model.removeStudent(this.view.input.value);
                 this.updateStudents();    
             } catch (e) {
- //               alert("Р’ СЃРїРёСЃРєРµ РЅРµС‚ С‚Р°РєРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°!");
-                alert("No such student in the list!");
+               alert("Такого студента нет в списке!");
+                // alert("No such student in the list!");
                 console.log(e.message);
                 
             }
@@ -44,6 +44,13 @@ class StudentsController {
                 this.updateStudents();                    
             } catch (e) {
                 console.log(e.message);
+                if (e.message == 'Duplicate name. No repeat allowed' ) {
+                    alert(`Невозможно заменить.
+                    Заменяемый студент уже в списке!`);
+                } else if (e.message == 'Check student name') {
+                alert(`Невозможно заменить.
+                    Удаляемого студента нет в списке!`);
+                }
                 
             }
         });
