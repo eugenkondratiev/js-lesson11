@@ -20,6 +20,18 @@ class StudentsView {
        this.container.appendChild(this.list);
    }
 
+   updateListBox(students) {
+    while (this.studentsListBox.firstChild) {
+        this.studentsListBox.removeChild(this.studentsListBox.firstChild);
+    }
+    students.forEach( (student) => {
+        const option = document.createElement('option');
+        option.textContent = student;
+        option.value = student;
+        this.studentsListBox.appendChild(option);
+    });
+   }
+
    updateList(students) {
        console.log(students);
       
@@ -32,7 +44,11 @@ class StudentsView {
            li.textContent = student;
            this.list.appendChild(li);
        });
+
+       this.updateListBox(students);
+
    }
+
 
    createForm(context) {
        const container = document.createElement('div');
@@ -43,6 +59,8 @@ class StudentsView {
        this.bottomContainer = document.createElement('div');
         this.substituteButton = document.createElement('button');
         this.newStudent = document.createElement('input');
+        this.studentsListBox = document.createElement('select');
+
 
        container.style.border = '1px solid black';
        container.style.borderRadius = '5px';
@@ -67,8 +85,12 @@ class StudentsView {
        this.newStudent.style.margin = '5px';
 
        this.substituteButton.textContent = 'SUBSTITUTE ON STUDENT';
-       this.substituteButton.style.height = '50px';
+       this.substituteButton.style.height = '40px';
        this.substituteButton.style.margin = '5px';
+
+       this.studentsListBox.style.height = '40px'
+       this.studentsListBox.style.width = '150px';
+
 
        this.removeButton.textContent = 'REMOVE STUDENT';
        this.removeButton.style.height = '40px';
@@ -78,9 +100,14 @@ class StudentsView {
        container.appendChild(this.addButton);
        container.appendChild(this.removeButton);
 
+       this.bottomContainer.appendChild(this.studentsListBox);
        this.bottomContainer.appendChild(this.substituteButton);
        this.bottomContainer.appendChild(this.newStudent);
+       
         container.appendChild(this.bottomContainer);
        (document.querySelector(context) || this.container).appendChild(container);
+
+
+       this.dropDown = document.getElementsByTagName('select')[0];
    }
 }

@@ -8,6 +8,7 @@ class StudentsController {
  
     setViewContext(context) {
         this.view.createForm(context);
+        this.updateStudents();
         this._addFormListeners();
     }
  
@@ -40,7 +41,8 @@ class StudentsController {
 
         this.view.substituteButton.addEventListener('click', () => {
             try {
-                this.model.substituteStudent(this.view.newStudent.value, this.view.input.value);
+            console.log(this.view.newStudent.value  , "  to " , this.view.dropDown.value);
+                this.model.substituteStudent( this.view.newStudent.value, this.view.dropDown.value);
                 this.updateStudents();                    
             } catch (e) {
                 console.log(e.message);
@@ -54,6 +56,14 @@ class StudentsController {
                 
             }
         });
+
+        console.log(this.view.dropDown, this.view.bottomContainer.studentsListbox, this.view.studentsListbox);
+        
+
+        this.view.dropDown.addEventListener('change', () => {
+            console.log("value", this.view.dropDown.value);
+            
+        })
 
     }
  
