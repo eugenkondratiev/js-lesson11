@@ -1,4 +1,6 @@
 
+
+
 class StudentsController {
 
     constructor(model, view) {
@@ -11,16 +13,20 @@ class StudentsController {
         this.updateStudents();
         this._addFormListeners();
     }
- 
+    _addFormListener(element, action) {
+
+    }
     _addFormListeners() {
         this.view.addButton.addEventListener('click', () => {
             try {
-                this.model.addStudent(this.view.input.value);
+//                console.log(this.model, this.model.DB, this.model.StudsDB);
+
+                console.log(this.model.addStudent(this.view.input.value));
                 this.updateStudents();                    
             } catch (error) {
                 console.log(error.message);
-                if (error.message == 'Duplicate name. No repeat allowed') {
-                   alert("Такой студент уже есть в списке!");
+                if (error.message == DUPLICATE_NAME_ERROR) {
+                   alert(SUCH_STUDENT_EXIST);
                     // alert("Such student already exist in a list!");
                 }
                 
@@ -29,10 +35,11 @@ class StudentsController {
     
         this.view.removeButton.addEventListener('click', () => {
             try {
+                
                 this.model.removeStudent(this.view.input.value);
                 this.updateStudents();    
             } catch (e) {
-               alert("Такого студента нет в списке!");
+               alert(NO_SUCH_STUDENT);
                 // alert("No such student in the list!");
                 console.log(e.message);
                 
@@ -46,18 +53,16 @@ class StudentsController {
                 this.updateStudents();                    
             } catch (e) {
                 console.log(e.message);
-                if (e.message == 'Duplicate name. No repeat allowed' ) {
-                    alert(`Невозможно заменить.
-                    Заменяемый студент уже в списке!`);
+                if (e.message == SUCH_STUDENT_EXIST ) {
+                    alert(NO_SUBSTITUTE_STUDENT_EXIST);
                 } else if (e.message == 'Check student name') {
-                alert(`Невозможно заменить.
-                    Удаляемого студента нет в списке!`);
+                alert(NO_SUBSTITUTE_NO_SUCH_STUDENT);
                 }
                 
             }
         });
 
-        console.log(this.view.dropDown, this.view.bottomContainer.studentsListbox, this.view.studentsListbox);
+        console.log(this.view.dropDown, this.view.bottomContainer.studentsListBox, this.view.studentsListBox);
         
 
         this.view.dropDown.addEventListener('change', () => {
@@ -68,12 +73,16 @@ class StudentsController {
     }
  
     showStudents() {
-        console.log(this.model.DB)
-        this.view.createList(this.model.DB);
+        this.view.createList(this.model.StudsDB);
+        
     }
-   
+
+    logStudents() {
+        console.log(this.model.StudsDB)
+    }
+
     updateStudents() {
-        this.view.updateList(this.model.DB);
+        this.view.updateList(this.model.StudsDB);
     }
  }
  

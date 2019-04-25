@@ -5,7 +5,7 @@ class StudentsView {
    }
 
    createList(students) {
-       console.log(students);
+//       console.log(students);
        const listTitle = document.createElement('h3');
        listTitle.textContent = 'Students';
 
@@ -33,7 +33,7 @@ class StudentsView {
    }
 
    updateList(students) {
-       console.log(students);
+//       console.log(students);
       
        while (this.list.firstChild) {
            this.list.removeChild(this.list.firstChild);
@@ -52,14 +52,23 @@ class StudentsView {
 
    createForm(context) {
        const container = document.createElement('div');
-       this.input = document.createElement('input');
-       this.addButton = document.createElement('button');
-       this.removeButton = document.createElement('button');
+    //   this.input = document.createElement('input');
 
-       this.bottomContainer = document.createElement('div');
-        this.substituteButton = document.createElement('button');
-        this.newStudent = document.createElement('input');
-        this.studentsListBox = document.createElement('select');
+    // this.addButton = document.createElement('button');
+    //    this.removeButton = document.createElement('button');
+    //        this.newStudent = document.createElement('input');
+    // this.substituteButton = document.createElement('button');
+
+
+    this.input = (new NameInput()).getInput();
+    this.newStudent = (new NameInput()).getInput();
+
+    this.addButton = (new DefaultButton('ADD STUDENT')).getBtn();
+    this.removeButton =  (new DefaultButton('REMOVE STUDENT')).getBtn();
+    this.substituteButton = (new DefaultButton('SUBSTITUTE ON STUDENT')).getBtn();
+
+    this.bottomContainer = document.createElement('div');
+    this.studentsListBox = document.createElement('select');
 
 
        container.style.border = '1px solid black';
@@ -67,34 +76,9 @@ class StudentsView {
        container.style.display = 'inline-block';
 
 
-       container.style.border = '1px solid black';
-       container.style.borderRadius = '5px';
-       container.style.display = 'inline-block';
 
-       this.input.style.width = '150px';
-       this.input.style.height = '40px';
-       this.input.style.margin = '5px';
-
-       this.addButton.textContent = 'ADD STUDENT';
-       this.addButton.style.height = '40px';
-       this.addButton.style.margin = '5px';
-
-
-       this.newStudent.style.width = '150px';
-       this.newStudent.style.height = '40px';
-       this.newStudent.style.margin = '5px';
-
-       this.substituteButton.textContent = 'SUBSTITUTE ON STUDENT';
-       this.substituteButton.style.height = '40px';
-       this.substituteButton.style.margin = '5px';
-
-       this.studentsListBox.style.height = '40px'
+       this.studentsListBox.style.height = defaultHeight;
        this.studentsListBox.style.width = '150px';
-
-
-       this.removeButton.textContent = 'REMOVE STUDENT';
-       this.removeButton.style.height = '40px';
-       this.removeButton.style.margin = '5px';
 
        container.appendChild(this.input);
        container.appendChild(this.addButton);
@@ -110,4 +94,43 @@ class StudentsView {
 
        this.dropDown = document.getElementsByTagName('select')[0];
    }
+}
+
+class NameInput {
+    constructor() {
+        this.input = document.createElement('input');
+        this.input.style.width = defaultInputStyle.width;
+        this.input.style.height = defaultInputStyle.height;
+        this.input.style.margin = defaultInputStyle.margin;
+        
+        this.input.addEventListener('blur', function() {
+            this.value = checkNameInput(this.value);
+        })
+
+
+    }
+
+    getInput() {
+        return this.input;
+    }
+
+
+
+}
+
+
+
+class DefaultButton {
+    constructor(caption) {
+        this.btn = document.createElement('button');
+        this.btn.textContent = caption;
+        this.btn.style.height = defaultButtonStyle.height;
+        this.btn.style.margin = defaultButtonStyle.margin;
+    }
+
+    getBtn() {
+        return this.btn;
+    }
+
+
 }

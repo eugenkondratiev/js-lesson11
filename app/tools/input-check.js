@@ -2,7 +2,7 @@
 class InputChecker {
     constructor(checkFunction) {
         this.check = checkFunction || isLetters;
-    
+    }    
 
     isLetters(input) {
         const lettersExp = /[A-Za-zА-ЯЁа-яёІЇЄіїє]+)/g;
@@ -28,7 +28,26 @@ class InputChecker {
 */
 
 
-function checkNameInput(input) {
-    const nameMatch = input.match(wordRegExp); 
-    return nameMatch[0] == input  ? input : "";
-}
+function checkNameInput(rawInput) {
+    let ret;
+    try {
+        const input = "" + rawInput;  
+        const nameMatch = input.match(wordRegExp); 
+        if (!nameMatch) { 
+            ret = "";
+        } 
+        else {
+            ret =  nameMatch[0] == input ? input : "";
+        }
+    }
+    catch(e) {
+
+        ret = "";
+    }
+    finally {
+        if (ret == "") {
+            console.log(rawInput + " - некорректное имя");
+        }
+      return ret;
+    }
+  }
