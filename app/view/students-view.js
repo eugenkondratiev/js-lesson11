@@ -1,5 +1,62 @@
 
-class StudentsView {
+
+class StudentsForm {
+    constructor(context){
+       this.container = document.querySelector(context);
+
+        const container = document.createElement('div');
+        //   this.input = document.createElement('input');
+    
+        // this.addButton = document.createElement('button');
+        //    this.removeButton = document.createElement('button');
+        //        this.newStudent = document.createElement('input');
+        // this.substituteButton = document.createElement('button');
+    
+    
+        this.input = (new NameInput()).name;
+        this.newStudent = (new NameInput()).name;
+    
+        this.addButton = (new DefaultButton('ADD STUDENT')).defaultBtn;
+        this.removeButton =  (new DefaultButton('REMOVE STUDENT')).defaultBtn;
+        this.substituteButton = (new DefaultButton('SUBSTITUTE ON STUDENT')).defaultBtn;
+        
+        this.bottomContainer = document.createElement('div');
+        this.studentsListBox = document.createElement('select');
+        
+    
+           container.style.border = '1px solid black';
+           container.style.borderRadius = '5px';
+           container.style.display = 'inline-block';
+    
+    
+    
+           this.studentsListBox.style.height = defaultHeight;
+           this.studentsListBox.style.width = defaultWidth;
+    
+           container.appendChild(this.input);
+           container.appendChild(this.addButton);
+           container.appendChild(this.removeButton);
+    
+           this.bottomContainer.appendChild(this.studentsListBox);
+           this.bottomContainer.appendChild(this.substituteButton);
+           this.bottomContainer.appendChild(this.newStudent);
+           
+            container.appendChild(this.bottomContainer);
+
+           (document.querySelector(context) || this.container).appendChild(container);
+    
+    
+           this.dropDown = document.getElementsByTagName('select')[0];
+    
+    }
+
+    getForm() { 
+        return this.container;
+    }
+}
+
+
+class StudentsView {//extends StudentsForm{
     constructor(context) {
        this.container = document.querySelector(context);
    }
@@ -13,6 +70,7 @@ class StudentsView {
 
        this.container.appendChild(listTitle);
        this.container.appendChild(this.list);
+      
    }
 
 
@@ -43,86 +101,25 @@ class StudentsView {
     }
 
    updateList(students) {
-//       console.log(students);
-      
-    //    while (this.list.firstChild) {
-    //        this.list.removeChild(this.list.firstChild);
-    //    }
-       this.list = this._clearList(this.list);
+        this.list = this._clearList(this.list);
+        this.list = this._fillList(this.list, students);
 
-
-    //    students.forEach((student) => {
-    //        const li = document.createElement('li');
-    //        li.textContent = student;
-    //        this.list.appendChild(li);
-    //    });
-    this.list = this._fillList(this.list, students);
-
-       this.updateListBox(students);
+        this.updateListBox(students);
 
    }
 
    updateListBox(students) {
-    // while (this.studentsListBox.firstChild) {
-    //     this.studentsListBox.removeChild(this.studentsListBox.firstChild);
-    // }
-    this.studentsListBox =  this._clearList(this.studentsListBox);
-    this._fillListBox(this.studentsListBox, students);
-
-    // students.forEach( (student) => {
-    //     const option = document.createElement('option');
-    //     option.textContent = student;
-    //     option.value = student;
-    //     this.studentsListBox.appendChild(option);
-    // });
+        this.form.studentsListBox =  this._clearList(this.form.studentsListBox);
+        this._fillListBox(this.form.studentsListBox, students);
    }
 
 
    createForm(context) {
-       const container = document.createElement('div');
-    //   this.input = document.createElement('input');
-
-    // this.addButton = document.createElement('button');
-    //    this.removeButton = document.createElement('button');
-    //        this.newStudent = document.createElement('input');
-    // this.substituteButton = document.createElement('button');
-
-
-    this.input = (new NameInput()).getInput();
-    this.newStudent = (new NameInput()).getInput();
-
-    this.addButton = (new DefaultButton('ADD STUDENT')).getBtn();
-    this.removeButton =  (new DefaultButton('REMOVE STUDENT')).getBtn();
-    this.substituteButton = (new DefaultButton('SUBSTITUTE ON STUDENT')).getBtn();
-
-    this.bottomContainer = document.createElement('div');
-    this.studentsListBox = document.createElement('select');
-
-
-       container.style.border = '1px solid black';
-       container.style.borderRadius = '5px';
-       container.style.display = 'inline-block';
-
-
-
-       this.studentsListBox.style.height = defaultHeight;
-       this.studentsListBox.style.width = defaultWidth;
-
-       container.appendChild(this.input);
-       container.appendChild(this.addButton);
-       container.appendChild(this.removeButton);
-
-       this.bottomContainer.appendChild(this.studentsListBox);
-       this.bottomContainer.appendChild(this.substituteButton);
-       this.bottomContainer.appendChild(this.newStudent);
-       
-        container.appendChild(this.bottomContainer);
-       (document.querySelector(context) || this.container).appendChild(container);
-
-
-       this.dropDown = document.getElementsByTagName('select')[0];
+       this.form = new StudentsForm(context);
    }
+   
 }
+
 
 class NameInput {
     constructor() {
@@ -136,8 +133,12 @@ class NameInput {
         })
     }
 
-    getInput() {
+    get name() {
         return this.input;
+    }
+
+    set name(_input) {
+        this.input = _input;
     }
 }
 
@@ -151,7 +152,12 @@ class DefaultButton {
         this.btn.style.margin = defaultButtonStyle.margin;
     }
 
-    getBtn() {
+    get defaultBtn() {
         return this.btn;
+    }
+
+
+    set defaultBtn(_button) {
+        this.btn = _button;
     }
 }

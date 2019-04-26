@@ -46,8 +46,8 @@ class StudentsDBHandler extends StudentsData{
         this._DB.splice(this.findStudent(student), 1);
     }
 
-    updateStudent(student, handler) {
-        ;
+    updateStudent(studentIn, studentOut) {
+        this._DB[this.findStudent(studentOut)] = studentIn;
     }
 }
 /*
@@ -113,6 +113,8 @@ class Students {
        } else if (this._DB.checkStudent(studentIn)) {
         throw new Error(DUPLICATE_NAME_ERROR);         
        } else {
+          console.log("this.substituteStudent", this);
+           this._DB.updateStudent(studentIn, studentOut);
 //           this._DB[this._DB.indexOf(studentOut)] = studentIn;
 
         this._DB.logDB();
