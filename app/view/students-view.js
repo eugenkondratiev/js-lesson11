@@ -10,40 +10,74 @@ class StudentsView {
        listTitle.textContent = 'Students';
 
        this.list = document.createElement('ol');
-       students.forEach((student) => {
-           const li = document.createElement('li');
-           li.textContent = student;
-           this.list.appendChild(li);
-       });
+        this.list = this._fillList(this.list);
+
+    //    students.forEach((student) => {
+    //        const li = document.createElement('li');
+    //        li.textContent = student;
+    //        this.list.appendChild(li);
+    //    });
 
        this.container.appendChild(listTitle);
        this.container.appendChild(this.list);
    }
 
    updateListBox(students) {
-    while (this.studentsListBox.firstChild) {
-        this.studentsListBox.removeChild(this.studentsListBox.firstChild);
-    }
+    // while (this.studentsListBox.firstChild) {
+    //     this.studentsListBox.removeChild(this.studentsListBox.firstChild);
+    // }
+    this.studentsListBox =  this._clearList(this.studentsListBox);
+    this._fillListBox(this.studentsListBox, students);
+
+    // students.forEach( (student) => {
+    //     const option = document.createElement('option');
+    //     option.textContent = student;
+    //     option.value = student;
+    //     this.studentsListBox.appendChild(option);
+    // });
+   }
+
+   _fillList(list, students) {
+    students.forEach((student) => {
+        const li = document.createElement('li');
+        li.textContent = student;
+        list.appendChild(li);
+    });
+    return list
+   }
+   
+   _fillListBox(listBox, students) {
     students.forEach( (student) => {
         const option = document.createElement('option');
         option.textContent = student;
         option.value = student;
-        this.studentsListBox.appendChild(option);
+        listBox.appendChild(option);
     });
+    return listBox;    
    }
+
+   _clearList(list) {
+    while (list.firstChild) {
+        list.removeChild(list.firstChild);          
+    }
+    return list;
+}
 
    updateList(students) {
 //       console.log(students);
       
-       while (this.list.firstChild) {
-           this.list.removeChild(this.list.firstChild);
-       }
+    //    while (this.list.firstChild) {
+    //        this.list.removeChild(this.list.firstChild);
+    //    }
+       this.list = this._clearList(this.list);
 
-       students.forEach((student) => {
-           const li = document.createElement('li');
-           li.textContent = student;
-           this.list.appendChild(li);
-       });
+
+    //    students.forEach((student) => {
+    //        const li = document.createElement('li');
+    //        li.textContent = student;
+    //        this.list.appendChild(li);
+    //    });
+    this.list = this._fillList(this.list, students);
 
        this.updateListBox(students);
 

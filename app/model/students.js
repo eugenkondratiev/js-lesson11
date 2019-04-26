@@ -115,7 +115,7 @@ class Students {
        } else {
 //           this._DB[this._DB.indexOf(studentOut)] = studentIn;
 
-        this.logDB();
+        this._DB.logDB();
         return this._formSubstituteStudentMessage(studentIn, studentOut);            
        }
        

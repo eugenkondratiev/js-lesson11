@@ -50,6 +50,7 @@ class StudentsController {
             try {
             console.log(this.view.newStudent.value  , "  to " , this.view.dropDown.value);
                 this.model.substituteStudent( this.view.newStudent.value, this.view.dropDown.value);
+                console.log(this);
                 this.updateStudents();                    
             } catch (e) {
                 console.log(e.message);
@@ -62,7 +63,7 @@ class StudentsController {
             }
         });
 
-        console.log(this.view.dropDown, this.view.bottomContainer.studentsListBox, this.view.studentsListBox);
+       // console.log(this.view.dropDown, this.view.bottomContainer.studentsListBox, this.view.studentsListBox);
         
 
         this.view.dropDown.addEventListener('change', () => {
