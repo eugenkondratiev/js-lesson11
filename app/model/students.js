@@ -82,7 +82,6 @@ class Students {
     }
    addStudent(student) {
        if (!this._DB.checkStudent(student)) {           
-//        if (checkNameInput(student) != "") {
         if (student != "") {
             this._DB.appendStudent(student);
             this._DB.logDB();
@@ -113,7 +112,6 @@ class Students {
        } else if (this._DB.checkStudent(studentIn)) {
         throw new Error(DUPLICATE_NAME_ERROR);         
        } else {
-          console.log("this.substituteStudent", this);
            this._DB.updateStudent(studentIn, studentOut);
 //           this._DB[this._DB.indexOf(studentOut)] = studentIn;
 
