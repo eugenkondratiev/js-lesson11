@@ -103,13 +103,13 @@ class Students {
            this._DB.logDB();      
            return this._formDeleteStudentMessage(student)
        } else {
-       throw new Error(CHECK_STUDENT);
+       throw new Error(CHECK_STUDENT_ERROR);
        }
    }
 
    substituteStudent(studentIn, studentOut) {
        if (!this._DB.checkStudent(studentOut)) {
-         throw new Error(CHECK_STUDENT);
+         throw new Error(CHECK_STUDENT_ERROR);
        } else if (this._DB.checkStudent(studentIn)) {
         throw new Error(DUPLICATE_NAME_ERROR);         
        } else {

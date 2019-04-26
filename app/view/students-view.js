@@ -5,63 +5,42 @@ class StudentsView {
    }
 
    createList(students) {
-//       console.log(students);
        const listTitle = document.createElement('h3');
        listTitle.textContent = 'Students';
 
-       this.list = document.createElement('ol');
-        this.list = this._fillList(this.list);
-
-    //    students.forEach((student) => {
-    //        const li = document.createElement('li');
-    //        li.textContent = student;
-    //        this.list.appendChild(li);
-    //    });
+        this.list = document.createElement('ol');
+        this.list = this._fillList(this.list, students);
 
        this.container.appendChild(listTitle);
        this.container.appendChild(this.list);
    }
 
-   updateListBox(students) {
-    // while (this.studentsListBox.firstChild) {
-    //     this.studentsListBox.removeChild(this.studentsListBox.firstChild);
-    // }
-    this.studentsListBox =  this._clearList(this.studentsListBox);
-    this._fillListBox(this.studentsListBox, students);
-
-    // students.forEach( (student) => {
-    //     const option = document.createElement('option');
-    //     option.textContent = student;
-    //     option.value = student;
-    //     this.studentsListBox.appendChild(option);
-    // });
-   }
 
    _fillList(list, students) {
-    students.forEach((student) => {
-        const li = document.createElement('li');
-        li.textContent = student;
-        list.appendChild(li);
-    });
-    return list
+        students.forEach((student) => {
+            const li = document.createElement('li');
+            li.textContent = student;
+            list.appendChild(li);
+        });
+        return list
    }
-   
+
    _fillListBox(listBox, students) {
-    students.forEach( (student) => {
-        const option = document.createElement('option');
-        option.textContent = student;
-        option.value = student;
-        listBox.appendChild(option);
-    });
-    return listBox;    
+        students.forEach( (student) => {
+            const option = document.createElement('option');
+            option.textContent = student;
+            option.value = student;
+            listBox.appendChild(option);
+        });
+        return listBox;    
    }
 
    _clearList(list) {
-    while (list.firstChild) {
-        list.removeChild(list.firstChild);          
+        while (list.firstChild) {
+            list.removeChild(list.firstChild);          
+        }
+        return list;
     }
-    return list;
-}
 
    updateList(students) {
 //       console.log(students);
@@ -81,6 +60,21 @@ class StudentsView {
 
        this.updateListBox(students);
 
+   }
+
+   updateListBox(students) {
+    // while (this.studentsListBox.firstChild) {
+    //     this.studentsListBox.removeChild(this.studentsListBox.firstChild);
+    // }
+    this.studentsListBox =  this._clearList(this.studentsListBox);
+    this._fillListBox(this.studentsListBox, students);
+
+    // students.forEach( (student) => {
+    //     const option = document.createElement('option');
+    //     option.textContent = student;
+    //     option.value = student;
+    //     this.studentsListBox.appendChild(option);
+    // });
    }
 
 
@@ -112,7 +106,7 @@ class StudentsView {
 
 
        this.studentsListBox.style.height = defaultHeight;
-       this.studentsListBox.style.width = '150px';
+       this.studentsListBox.style.width = defaultWidth;
 
        container.appendChild(this.input);
        container.appendChild(this.addButton);
@@ -140,16 +134,11 @@ class NameInput {
         this.input.addEventListener('blur', function() {
             this.value = checkNameInput(this.value);
         })
-
-
     }
 
     getInput() {
         return this.input;
     }
-
-
-
 }
 
 
@@ -165,6 +154,4 @@ class DefaultButton {
     getBtn() {
         return this.btn;
     }
-
-
 }
